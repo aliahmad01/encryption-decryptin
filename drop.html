@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Selection</title>
+    <script>
+        function openFile() {
+            // Get the selected value from the dropdown
+            var selectedValue = document.getElementById("fileDropdown").value;
+
+            // Define the file URLs based on the selected value
+            var fileURLs = {
+                'apple': 'caesar.html',
+                'orange': 'morse.html',
+                'banana': 'banana.html',
+                'grape': 'grape.html'
+            };
+
+            // Check if the selected value exists in the fileURLs object
+            if (fileURLs[selectedValue]) {
+                // Redirect to the selected file URL
+                window.location.href = fileURLs[selectedValue];
+            } else {
+                alert("Invalid selection");
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <h2>Select a file:</h2>
+
+    <form>
+        <label for="fileDropdown">Choose a file:</label>
+        <select id="fileDropdown" name="fileDropdown" onchange="openFile()">
+            <option value="apple">Apple File</option>
+            <option value="orange">Orange File</option>
+            <option value="banana">Banana File</option>
+            <option value="grape">Grape File</option>
+        </select>
+    </form>
+
+</body>
+
+</html>

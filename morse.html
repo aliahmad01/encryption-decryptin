@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Code Encryption/Decryption</title>
+</head>
+<body>
+
+    <h2>Morse Code Encryption/Decryption</h2>
+    
+    <label for="inputText">Enter Text:</label>
+    <input type="text" id="inputText">
+    
+    <button onclick="encrypt()">Encrypt to Morse Code</button>
+    <button onclick="decrypt()">Decrypt to Plain Text</button>
+    
+    <p>Output: <span id="output"></span></p>
+
+    <script>
+        const morseCodeMap = {
+            "A": ".-", "B": "-...", "C": "-.-.", "D": "-..",
+            "E": ".", "F": "..-.", "G": "--.", "H": "....",
+            "I": "..", "J": ".---", "K": "-.-", "L": ".-..",
+            "M": "--", "N": "-.", "O": "---", "P": ".--.",
+            "Q": "--.-", "R": ".-.", "S": "...", "T": "-",
+            "U": "..-", "V": "...-", "W": ".--", "X": "-..-",
+            "Y": "-.--", "Z": "--..", "0": "-----", "1": "----.",
+            "2": "---..", "3": "----", "4": ".....", "5": "-....",
+            "6": "--...", "7": "---.", "8": "----.", "9": "----..",
+            ".": ".-.-.-", ",": "--..--", ":": "---...", ";": "-.-.-.",
+            "?": "..--..", "=": "-...-", "-": "-....-", "_": "..--.-",
+            "'": ".----.", "/": "-..-.", "(": "-.--.", ")": "-.--.-",
+            "&": ".-...", "!": "-.-.--"
+        };
+
+        function encrypt() {
+            const inputText = document.getElementById('inputText').value.toUpperCase();
+            const morseCode = textToMorseCode(inputText);
+            document.getElementById('output').innerText = morseCode;
+        }
+
+        function decrypt() {
+            const morseCode = document.getElementById('inputText').value;
+            const plainText = morseCodeToText(morseCode);
+            document.getElementById('output').innerText = plainText;
+        }
+
+        function textToMorseCode(text) {
+            return text.split("").map(char => morseCodeMap[char] || " ").join(" ");
+        }
+
+        function morseCodeToText(code) {
+            const reversedMap = Object.fromEntries(Object.entries(morseCodeMap).map(([key, value]) => [value, key]));
+            return code.split(" ").map(symbol => reversedMap[symbol] || " ").join("");
+        }
+    </script>
+
+</body>
+</html>

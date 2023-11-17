@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caesar Cipher Encryption/Decryption</title>
+</head>
+<body>
+
+    <h2>Caesar Cipher Encryption/Decryption</h2>
+    
+    <label for="inputText">Enter Text:</label>
+    <input type="text" id="inputText">
+    
+    <label for="shift">Enter Shift:</label>
+    <input type="number" id="shift" min="1" max="25" value="3">
+    
+    <button onclick="encrypt()">Encrypt</button>
+    <button onclick="decrypt()">Decrypt</button>
+    
+    <p>Output: <span id="output"></span></p>
+
+    <script>
+        function encrypt() {
+            const inputText = document.getElementById('inputText').value.toUpperCase();
+            const shift = parseInt(document.getElementById('shift').value);
+            const encryptedText = caesarCipher(inputText, shift);
+            document.getElementById('output').innerText = encryptedText;
+        }
+
+        function decrypt() {
+            const inputText = document.getElementById('inputText').value.toUpperCase();
+            const shift = parseInt(document.getElementById('shift').value);
+            // Decryption is the same as encryption with a negative shift
+            const decryptedText = caesarCipher(inputText, -shift);
+            document.getElementById('output').innerText = decryptedText;
+        }
+
+        function caesarCipher(text, shift) {
+            return text.replace(/[A-Z]/g, function (char) {
+                return String.fromCharCode((char.charCodeAt(0) - 65 + shift + 26) % 26 + 65);
+            });
+        }
+    </script>
+
+</body>
+</html>
