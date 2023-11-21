@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Style for the dropdown container */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 20px;
+        }
+
+        /* Style for the dropdown button */
+        .dropdown button {
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Style for the dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        /* Show the dropdown content when the button is clicked */
+        .show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- The dropdown container -->
+    <div class="dropdown">
+        <!-- Button to toggle the dropdown -->
+        <button onclick="toggleDropdown()">Run Code</button>
+
+        <!-- Dropdown content -->
+        <div id="myDropdown" class="dropdown-content">
+            <!-- Button for Morse Code -->
+            <button onclick="runMorseCode()">Run Morse Code</button>
+            
+
+            <!-- Button for Caesar Cipher -->
+            <button onclick="runCaesarCode()">Run Caesar Cipher</button>
+        </div>
+    </div>
+
+    <!-- Output display area -->
+    <div id="outputDisplay"></div>
+
+    <script>
+        // Function to toggle the dropdown and show/hide the code options
+        function toggleDropdown() {
+            var dropdown = document.getElementById("myDropdown");
+            dropdown.classList.toggle("show");
+        }
+
+        // Function to execute Morse Code example
+        function runMorseCode() {
+            
+            var text = 'Hello, World!';
+            var morseCode = {
+                'A': '.-', 'B': '-...', 'C': '-.-.', 'D': '-..', 'E': '.',
+                'F': '..-.', 'G': '--.', 'H': '....', 'I': '..', 'J': '.---',
+                'K': '-.-', 'L': '.-..', 'M': '--', 'N': '-.', 'O': '---',
+                'P': '.--.', 'Q': '--.-', 'R': '.-.', 'S': '...', 'T': '-',
+                'U': '..-', 'V': '...-', 'W': '.--', 'X': '-..-', 'Y': '-.--',
+                'Z': '--..', '0': '-----', '1': '.----', '2': '..---', '3': '...--',
+                '4': '....-', '5': '.....', '6': '-....', '7': '--...', '8': '---..',
+                '9': '----.', ' ': '/'
+            };
+
+            var morseResult = '';
+            for (var i = 0; i < text.length; i++) {
+                var char = text[i].toUpperCase();
+                if (morseCode.hasOwnProperty(char)) {
+                    morseResult += morseCode[char] + ' ';
+                } else {
+                    morseResult += char;
+                }
+            }
+
+            console.log('Morse Code:', morseResult.trim());
+            ;
+        }
+
+        // Function to execute Caesar Cipher example
+        function runCaesarCode() {
+            
+            var text = 'Hello, World!';
+            var shift = 3;
+
+            var resultText = '';
+            for (var i = 0; i < text.length; i++) {
+                var char = text[i].toUpperCase();
+                if (char >= 'A' && char <= 'Z') {
+                    var encryptedChar = String.fromCharCode((char.charCodeAt(0) - 65 + shift) % 26 + 65);
+                    resultText += encryptedChar;
+                } else {
+                    resultText += char;
+                }
+            }
+
+            console.log('Caesar Cipher:', resultText);
+        }
+
+        // Function to execute provided code
+        // function executeCode(code) {
+        //     try {
+        //         eval(code);
+        //     } catch (error) {
+        //         console.error('Error executing code:', error);
+        //     }
+        // }
+    </script>
+
+</body>
+
+</html>
